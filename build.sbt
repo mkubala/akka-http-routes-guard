@@ -47,5 +47,10 @@ lazy val examples = Project(
 lazy val tests = Project(
   id = "tests",
   base = file("tests"),
-  settings = buildSettings
+  settings = buildSettings ++ Seq(
+    libraryDependencies ++= Seq(
+      "org.scala-lang" % "scala-reflect" % scalaV % "test",
+      "org.scala-lang" % "scala-compiler" % scalaV % "test"
+    )
+  )
 ).dependsOn(macros)
