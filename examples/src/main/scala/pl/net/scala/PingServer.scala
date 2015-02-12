@@ -4,9 +4,11 @@ import akka.actor.ActorSystem
 import akka.http.Http
 import akka.http.model.StatusCodes._
 import akka.http.server.Directives._
+import akka.http.server.{RouteResult, RequestContext, Route}
 import akka.stream.FlowMaterializer
 
-import scala.concurrent.ExecutionContextExecutor
+import scala.concurrent.{Future, ExecutionContextExecutor}
+import scala.util.Random
 
 trait PingService extends GuardedRoutes {
 
@@ -16,18 +18,57 @@ trait PingService extends GuardedRoutes {
 
   implicit val materializer: FlowMaterializer
 
+  /*
+  * Try remove some concatenation tilde operators and see our macro in action
+  */
+
   // guardedRoute is our def macro
-  val routes = guardedRoute {
-    get {
-      complete(OK -> "Hello from PingServer!")
-    } ~
-    path("ping") {
-      (post & entity(as[String])) { msg =>
-        complete(OK -> s"Pong, $msg!")
-      } ~
+  val routes: Route = guardedRoute {
+    lazy val getRoute = path("asd") {
       get {
-        complete(OK -> "Pong!")
+        complete(OK -> "complete GET")
+      } ~
+        post {
+          complete(OK -> "YYY")
+        }
+    }
+
+    def createRoute = {
+      get {
+        complete(OK -> "complete GET")
+      } ~
+        post {
+          complete(OK -> "YYY")
+        }
+    }
+
+    val w = () =>
+
+    val xxx = if (new Random().nextBoolean()) {
+      get {
+        complete(OK -> "complete GET")
+      } ~
+      post {
+        complete(OK -> "YYY")
       }
+    } else {
+      get {
+        complete(OK -> "complete GET")
+      } ~
+      post {
+        complete(OK -> "YYY")
+      }
+    }
+
+    println("I love dumplings")
+
+    xxx ~ createRoute ~ getRoute ~ post {
+      get {
+        complete(OK -> "XXX")
+      } ~
+        post {
+          complete(OK -> "xxx POST")
+        }
     }
   }
 
@@ -42,3 +83,4 @@ object PingServer extends App with PingService {
   Http().bind(interface = "localhost", port = 8080).startHandlingWith(routes)
 
 }
+
