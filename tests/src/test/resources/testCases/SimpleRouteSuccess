@@ -1,0 +1,6 @@
+get {
+  complete(OK)
+} ~
+post {
+  complete(OK)
+}

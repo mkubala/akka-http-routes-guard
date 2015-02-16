@@ -1,0 +1,10 @@
+def buildRoute = {
+  get {
+    complete(OK)
+  }
+  post {
+    complete(OK)
+  }
+}
+
+buildRoute

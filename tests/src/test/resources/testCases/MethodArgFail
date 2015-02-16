@@ -1,0 +1,12 @@
+def prefixed(route: Route): Route = path("somePrefix") {
+  route
+}
+
+prefixed {
+  get {
+    complete(OK -> "Completed")
+  }
+  post {
+    complete(OK -> "Completed")
+  }
+}

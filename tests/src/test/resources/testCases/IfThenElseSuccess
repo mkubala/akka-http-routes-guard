@@ -1,0 +1,17 @@
+import scala.util.Random
+
+if (new Random().nextBoolean()) {
+  get {
+    complete(OK)
+  } ~
+  post {
+    complete(OK)
+  }
+} else {
+  get {
+    complete(OK)
+  } ~
+  post {
+    complete(OK)
+  }
+}

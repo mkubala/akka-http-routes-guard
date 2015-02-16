@@ -1,0 +1,10 @@
+val routeAsVal = {
+  get {
+    complete(OK)
+  }
+  post {
+    complete(OK)
+  }
+}
+
+routeAsVal

@@ -1,0 +1,10 @@
+var routeAsVar = {
+  get {
+    complete(OK)
+  }
+  post {
+    complete(OK)
+  }
+}
+
+routeAsVar

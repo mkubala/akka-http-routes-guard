@@ -1,0 +1,10 @@
+val buildRouteFunc: Any => Route = _ => {
+  get {
+    complete(OK)
+  }
+  post {
+    complete(OK)
+  }
+}
+
+buildRouteFunc()

@@ -1,0 +1,9 @@
+"sthg" match {
+  case _ =>
+    get {
+      complete(OK)
+    } ~
+    post {
+      complete(OK)
+    }
+}
