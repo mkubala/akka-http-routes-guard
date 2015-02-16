@@ -4,10 +4,10 @@ import akka.actor.ActorSystem
 import akka.http.Http
 import akka.http.model.StatusCodes._
 import akka.http.server.Directives._
-import akka.http.server.{RouteResult, RequestContext, Route}
+import akka.http.server.Route
 import akka.stream.FlowMaterializer
 
-import scala.concurrent.{Future, ExecutionContextExecutor}
+import scala.concurrent.ExecutionContextExecutor
 import scala.util.Random
 
 trait PingService extends GuardedRoutes {
@@ -24,50 +24,74 @@ trait PingService extends GuardedRoutes {
 
   // guardedRoute is our def macro
   val routes: Route = guardedRoute {
+
     lazy val getRoute = path("asd") {
       get {
         complete(OK -> "complete GET")
       } ~
         post {
-          complete(OK -> "YYY")
+          complete(OK -> "Complered")
         }
     }
 
     def createRoute = {
       get {
-        complete(OK -> "complete GET")
+        complete(OK -> "Completed")
       } ~
         post {
-          complete(OK -> "YYY")
+          complete(OK -> "Complered")
         }
     }
 
-    val w = () =>
+    // Pattern matching example
+    val patternMatched = "someStr" match {
+      case str: String => get {
+          complete(OK -> str)
+        } ~
+        post {
+          complete(OK -> str)
+        }
+      case _ => complete(NotFound)
+    }
+
+    // def args example
+    def wrapRoute(r: Route): Route = path("somePrefix") {
+      r
+    }
+
+    val wrappedRouteEx = wrapRoute {
+      get {
+        complete(OK -> "Completed")
+      } ~
+      post {
+        complete(OK -> "Completed")
+      }
+    }
 
     val xxx = if (new Random().nextBoolean()) {
       get {
-        complete(OK -> "complete GET")
+        complete(OK -> "Completed")
       } ~
       post {
-        complete(OK -> "YYY")
+        complete(OK -> "Complered")
       }
     } else {
       get {
-        complete(OK -> "complete GET")
+        complete(OK -> "Completed")
       } ~
       post {
-        complete(OK -> "YYY")
+        complete(OK -> "Complered")
       }
     }
 
     println("I love dumplings")
 
-    xxx ~ createRoute ~ getRoute ~ post {
+    wrappedRouteEx ~ patternMatched ~ xxx ~ createRoute ~ getRoute ~ post {
       get {
-        complete(OK -> "XXX")
+        complete(OK -> "Completed")
       } ~
         post {
-          complete(OK -> "xxx POST")
+          complete(OK -> "Completed")
         }
     }
   }
