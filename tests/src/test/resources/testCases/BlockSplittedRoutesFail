@@ -1,0 +1,9 @@
+{
+  get {
+    complete(OK)
+  }
+  println("I love dumplings!")
+  post {
+    complete(OK)
+  }
+}
