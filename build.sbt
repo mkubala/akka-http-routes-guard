@@ -2,7 +2,7 @@ val akkaV       = "2.3.9"
 val akkaStreamV = "1.0-M2"
 
 lazy val buildSettings = Seq(
-  organization := "pl.net.scala",
+  organization := "com.softwaremill",
   version := "0.1-SNAPSHOT",
   scalaVersion := "2.11.5",
   libraryDependencies ++= Seq(

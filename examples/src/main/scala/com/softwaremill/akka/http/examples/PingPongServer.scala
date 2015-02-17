@@ -1,4 +1,4 @@
-package pl.net.scala
+package com.softwaremill.akka.http.examples
 
 import akka.actor.ActorSystem
 import akka.http.Http
@@ -6,6 +6,7 @@ import akka.http.model.StatusCodes._
 import akka.http.server.Directives._
 import akka.http.server.Route
 import akka.stream.FlowMaterializer
+import com.softwaremill.akka.http.GuardedRoutes
 
 import scala.concurrent.ExecutionContextExecutor
 import scala.io.StdIn

@@ -1,4 +1,4 @@
-package pl.net.scala
+package com.softwaremill.akka.http
 
 import java.io.File
 
@@ -10,7 +10,7 @@ import scala.tools.reflect.ToolBoxError
 /*
 * Inspired by Macwire's (https://github.com/adamw/macwire) CompileTests
 */
-class CompileTests extends FlatSpec with Matchers {
+class GuardedRoutesCompileTests extends FlatSpec with Matchers {
 
   trait CompileTestResult {}
 
@@ -75,7 +75,7 @@ class CompileTests extends FlatSpec with Matchers {
       |
       |import scala.concurrent.ExecutionContextExecutor
       |
-      |import pl.net.scala.GuardedRoutes
+      |import com.softwaremill.akka.http.GuardedRoutes
       |
       |trait Test extends GuardedRoutes {
       |

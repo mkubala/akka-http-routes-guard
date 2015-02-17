@@ -1,19 +1,13 @@
-package pl.net.scala
+package com.softwaremill.akka.http
 
 import akka.http.server.Route
 
 import scala.language.experimental.macros
 import scala.reflect.macros.blackbox
 
-trait GuardedRoutes {
+import scala.language.experimental.macros
 
-  def guardedRoute(routeDef: Route): Route = macro RouteMacro.impl
-
-}
-
-object GuardedRoutes extends GuardedRoutes
-
-private object RouteMacro {
+private[http] object RouteMacro {
 
   val abortMessage = "Missing routes' concatenation tilde (~) operator!"
 
